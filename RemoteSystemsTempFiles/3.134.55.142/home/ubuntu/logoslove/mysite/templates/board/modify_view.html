@@ -1,0 +1,58 @@
+{% extends "bbs.html" %}
+{% block content %}
+<style>
+table {
+	border-collapse:collapse;
+	width:50%;
+}
+table, td,th {
+	border:1px solid green;
+}
+th {
+	background-color:black;
+	color:white;
+}
+</style>
+<form id=frm method=post action='{% url 'board:modifypost' %}'>
+{% csrf_token %}
+{% include "form_errors.html" %}
+<input type=hidden name=rowid id=rowid value='{{rec.rowid}}'>
+<table align=center>
+<tr><td align=right>분류</td><td><select id=seltype name=seltype><option value='-'>-</option>
+{% for one in btype %}
+<option value={{one.name}}>{{one.name}}</option>
+{% endfor %}
+</select></td></tr>
+<tr><td align=right>제목</td><td><input type=text name=title id=title size=80 value='{{rec.title}}'></td></tr>
+<tr><td align=right>내용</td><td><textarea name=content id=content rows=20 cols=80>{{rec.content}}</textarea></td></tr>
+<tr><td colspan=2 align=right>
+	<button name=btnAddNew id=btnAddNew>글 등록</button>
+	<a href="{% url 'board:view' rec.rowid %}">취소</a>
+</td></tr>
+</table>
+</form>
+<script src="https://cdn.tiny.cloud/1/h21f3y3ud8gbt6wv78u3kjwmbae3nv5ire0k6bvvbq3zzhjr/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+      selector: 'textarea'
+    });
+</script><script>
+$(document)
+.ready(function(){
+	$('#seltype').val('{{rec.type}}');
+	return false;
+})
+.on('click','#btnAddNew',function(){
+	$('#title').val($.trim($('#title').val()));
+	$('#content').val($.trim($('#content').val()));
+	if($('#title').val()==''){
+		alert('제목을 입력하십시오'); return false;
+	}
+	if($('#content').val()==''){
+		alert('게시물 내용을 입력하십시오'); return false;
+	}
+	$('#frm').submit();
+	return false;
+})
+</script>
+{% endblock %}

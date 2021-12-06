@@ -1,0 +1,58 @@
+{% extends "bbs.html" %}
+{% block content %}
+<tr>
+	<td align=right>
+		{% if nick is None %}
+		<a href='{% url 'common:login' %}'>로그인</a>
+		{% else %}
+		[<a href='{% url 'common:info' %}'>{{nick}}</a>]&nbsp;&nbsp;<a href='{% url 'common:logout' %}'>로그아웃</a>
+		{% endif %}
+	</td>
+</tr>
+<tr>
+	<td>
+	<table align=center class='border'>
+	<tr><td align=right class='border'>분류</td><td colspan=5 class='border'>{{rec.type}}</td></tr>
+	<tr>
+		<td align=right class='border'>제목</td><td colspan=3 class='border'>{{rec.title}}</td>
+		<td align=right class='border'>조회수</td><td class='border'>{{rec.hit}}</td>
+	</tr>
+	<tr><td align=right class='border' valign=top>내용</td>
+		  <td colspan=5 class='border'><div  style='min-height:200px;'>{{rec.content|safe}}</div></td></tr>
+	<tr><td align=right class='border'>작성자</td>
+		<td class='border'>{{rec.author}}</td>
+		<td align=right class='border'>작성시각</td>
+		<td class='border'>{{rec.created}}</td>
+		<td align=right class='border'>수정시각</td>
+		<td class='border'>{{rec.updated}}</td>
+	</tr>
+	<tr><td colspan=2>
+		<a href='{% url 'board:bbs_list' %}'>목록보기</a>
+	{% if nick is not None %}
+		<a href="{% url 'board:newview' %}">새글쓰기</a>
+	{% endif %}	
+	</td><td colspan=4 align=right>
+	{% if nick is not None %}
+		<button id=btnModify>수정</button>
+		<button id=btnDelete>삭제</button>
+	{% endif %}	
+	</td></tr>
+	</table>
+	</td>
+</tr>	
+{% if nick is not None %}
+<script>
+$(document)
+.on('click','#btnModify',function(){
+	document.location="{% url 'board:modifyview' rec.rowid %}";
+	return false;
+})
+.on('click','#btnDelete',function(){
+	if(!confirm('정말로 삭제하시겠습니까?')) return false; 	
+	document.location="{% url 'board:removepost' rec.rowid %}";
+	return false;
+})
+;
+</script>
+{% endif %}
+{% endblock %}

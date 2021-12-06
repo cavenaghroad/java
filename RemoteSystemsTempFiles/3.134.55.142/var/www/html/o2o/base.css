@@ -1,0 +1,66 @@
+#header
+{
+    width: 100%;
+    height: 150px;
+    background-color:cornflowerblue;
+    text-align:center;
+}
+#content
+{
+    /* height: 1024px; */
+    top:150px;
+    /* width: 50%; */
+    background-color:honeydew;
+    overflow:auto;
+     font-family:"Noto Sans KR";
+     font-size:14px;
+}
+#divRight {
+	position:absolute;
+	top:160px;
+	left:940px;
+	width:40%;
+	height:100%;
+	background-color:yellow;
+	overflow:auto;
+}
+table.lines {
+     border:1px solid blue;
+     border-collapse:collapse;
+     font-size:14px;
+}
+.lines tr {
+    height:24px;
+}
+ .lines thead tr {
+	background-color:black;
+	color:white;
+}
+.lines thead th {
+    border: 1px solid white;
+}
+ .w100px {
+	width:100px;
+}
+.lines tbody td{
+     border: 1px solid blue; 
+    cursor:hand;
+}
+.base_bg {
+	background-color:honeydew;
+}
+.click_bg {
+	background-color:cyan;
+}
+.ui-dialog-titlebar-close {
+    visibility: hidden;
+}
+#tblMentee tr:hover,
+#tblMentor tr:hover,
+#tblHistory tr:hover 
+{
+	background-color:lightgrey;
+}
+#tblMentee tr.selected {
+	background-color:lightgrey;
+}

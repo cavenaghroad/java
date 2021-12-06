@@ -1,0 +1,1031 @@
+function ClientParticipant(oWord, owdoc, oCRBO)
+{
+    oWord.Selection.Font.Size = 8;
+	
+    oWord.Selection.Font.Color = 0
+	
+    var oTbl3 = owdoc.Tables.Add(oWord.Selection.Range, 1, 6);
+	
+    oTbl3.Columns(1).SetWidth(89.4,1);
+	
+    oTbl3.Columns(2).SetWidth(89.4,1);
+	
+    oTbl3.Columns(3).SetWidth(132.6,1);
+			
+	
+    //1st Row
+	oWord.Selection.Font.Bold = true;
+	
+	
+    oTbl3.Rows(1).Cells(1).Select();	
+	
+    oWord.Selection.TypeText("First Name");
+	
+	
+    oTbl3.Rows(1).Cells(2).Select();		
+	
+    oWord.Selection.TypeText("Family Name");
+	
+	
+    oTbl3.Rows(1).Cells(3).Select();
+	
+    oWord.Selection.TypeText("Company");
+	
+	
+    oTbl3.Rows(1).Cells(4).Select();
+	
+    oWord.Selection.TypeText("Division");
+	
+	
+    oTbl3.Rows(1).Cells(5).Select();
+	
+    oWord.Selection.TypeText("Email");
+	
+	
+    oTbl3.Rows(1).Cells(6).Select();
+	
+    oWord.Selection.TypeText("Job Title");
+	
+	
+	
+    //Get Client Participant
+	
+    var oCRBCCon = oCRBO.GetBusComp("EDB Call Report Contact");
+	
+    var iRowCount = 2
+	with(oCRBCCon)
+	{		
+		
+        ActivateField("First Name");	
+		
+        ActivateField("Last Name");	
+		
+        ActivateField("Account");	
+		
+        ActivateField("Account Location");	
+		
+        ActivateField("Email Address");	
+		
+        ActivateField("Account Job Title");	
+		
+		
+        ClearToQuery();
+		
+        ExecuteQuery();	
+		
+        var bIsRecord = FirstRecord();
+		
+        while(bIsRecord)
+		{
+			
+            oWord.Selection.InsertRowsBelow();
+			
+			
+            oTbl3.Rows(iRowCount).Cells(1).Select();
+			
+            oWord.Selection.ParagraphFormat.Alignment = 3;
+			
+            oWord.Selection.Font.Bold = false;
+
+            oWord.Selection.TypeText(GetFieldValue("First Name"));
+			
+			
+            oTbl3.Rows(iRowCount).Cells(2).Select();
+			
+            oWord.Selection.ParagraphFormat.Alignment = 3;
+			
+            oWord.Selection.Font.Bold = false;
+			
+            oWord.Selection.TypeText(GetFieldValue("Last Name"));
+	
+			
+            oTbl3.Rows(iRowCount).Cells(3).Select();
+			
+            oWord.Selection.ParagraphFormat.Alignment = 3;
+			
+            oWord.Selection.Font.Bold = false;
+			
+            oWord.Selection.TypeText(GetFieldValue("Account"));
+		
+			
+            oTbl3.Rows(iRowCount).Cells(4).Select();
+			
+            oWord.Selection.ParagraphFormat.Alignment = 3;
+			
+            oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Account Location"));
+			
+			oTbl3.Rows(iRowCount).Cells(5).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Email Address"));
+	
+			oTbl3.Rows(iRowCount).Cells(6).Select();	
+			oWord.Selection.ParagraphFormat.Alignment = 3;		
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Account Job Title"));			
+	
+			iRowCount ++;
+			bIsRecord = NextRecord();
+		}
+	}
+	
+	oCRBCCon = null;
+	
+}
+
+function ClientParticipantImage(oWord, owdoc, oCRBO)
+{	
+	oWord.Selection.Font.Size = 8;
+	oWord.Selection.Font.Color = 0
+	var oTbl3 = owdoc.Tables.Add(oWord.Selection.Range, 1, 5);
+	oTbl3.Columns(1).SetWidth(89.4,1);
+	oTbl3.Columns(2).SetWidth(89.4,1);
+	oTbl3.Columns(3).SetWidth(132.6,1);
+			
+	//1st Row
+	oWord.Selection.Font.Bold = true;
+	
+	oTbl3.Rows(1).Cells(1).Select();	
+	oWord.Selection.TypeText("First Name");
+
+	oTbl3.Rows(1).Cells(2).Select();		
+	oWord.Selection.TypeText("Family Name");
+	
+	oTbl3.Rows(1).Cells(3).Select();
+	oWord.Selection.TypeText("Company");
+	
+	oTbl3.Rows(1).Cells(4).Select();
+	oWord.Selection.TypeText("Division");
+	
+	oTbl3.Rows(1).Cells(5).Select();
+	oWord.Selection.TypeText("Job Title");
+	
+	
+	//Get Client Participant
+	var oCRBCCon = oCRBO.GetBusComp("EDB Contact Call Report Participants");
+	var iRowCount = 2
+	with(oCRBCCon)
+	{		
+		ActivateField("CR First Name");	
+		ActivateField("CR Last Name");	
+		ActivateField("CR Account");	
+		ActivateField("CR Account Location");	
+		ActivateField("CR Account Job Title");	
+		
+		ClearToQuery();
+		ExecuteQuery();	
+		var bIsRecord = FirstRecord();
+		while(bIsRecord)
+		{
+			oWord.Selection.InsertRowsBelow();
+			
+			oTbl3.Rows(iRowCount).Cells(1).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("CR First Name"));
+			
+			oTbl3.Rows(iRowCount).Cells(2).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("CR Last Name"));
+	
+			oTbl3.Rows(iRowCount).Cells(3).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("CR Account"));
+		
+			oTbl3.Rows(iRowCount).Cells(4).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("CR Account Location"));
+	
+			oTbl3.Rows(iRowCount).Cells(5).Select();	
+			oWord.Selection.ParagraphFormat.Alignment = 3;		
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("CR Account Job Title"));			
+	
+			iRowCount ++;
+			bIsRecord = NextRecord();
+		}
+	}
+	
+	oCRBCCon = null;
+	
+}
+
+function CopyTemplate(oWord, owdoc, oCRBO)
+{
+	//Open and Copy CR Template		
+	var oCRAtt = oCRBO.GetBusComp("EDB Call Report Attachment");
+	var oWord1 = null;
+	var owdoc1 = null;
+	var ilength = null;
+	var iPath = null;
+	var sOpenPath = null;
+	var sRetVal = null;
+	var icut = null;
+		
+	with(oCRAtt)	
+	{		
+		ExecuteQuery();
+		if(FirstRecord())
+		{
+			sRetVal = InvokeMethod("GetFile", "ActivityFileName");
+		
+			oWord1 = COMCreateObject("Word.Application");
+			oWord1.DisplayAlerts = 0;				
+			oWord1.Visible = 0;				
+		
+			//--total length returned
+			ilength = sRetVal.length;
+			//--total length minus "Success,"
+			iPath = ilength - 8;		
+			sOpenPath = sRetVal.substring(8, ilength);
+						
+			owdoc1 = oWord1.Documents.Open(sOpenPath);
+			
+			oWord1.Selection.WholeStory();
+		    oWord1.Selection.Copy();
+		    
+		    oWord.Selection.Paste();
+		    
+		    owdoc1.Close(0);  
+			oWord1.Quit(0);
+			
+			owdoc1 = null;
+			oWord1 = null;
+		}				
+	}	
+	
+	oCRAtt = null;
+	
+	//If Call report does not have a template
+	/*if(sRetVal == null)
+	{
+		var oCRAttBO = TheApplication().GetBusObject("EDB Call Report Attachment");
+		var oCRAttBC = oCRAttBO.GetBusComp("EDB Call Report Attachment");
+		
+		oCRAttBC.ClearToQuery();
+		oCRAttBC.ExecuteQuery();
+		if(oCRAttBC.FirstRecord())
+		{
+			sRetVal = oCRAttBC.InvokeMethod("GetFile", "ActivityFileName");
+			ilength = sRetVal.length;
+			iPath = ilength - 8;	
+			sOpenPath = sRetVal.substring(8, ilength);	
+		}
+		
+		oCRAttBC = null;
+		oCRAttBO = null;
+		
+	}*/
+	
+
+	var oLitBO = TheApplication().GetBusObject("Admin Sales Tool");
+	var oLitBC = oLitBO.GetBusComp("Admin Sales Tool");
+	
+	with (oLitBC)
+	{
+		ClearToQuery();
+		SetSearchSpec ("Name" , "EDB Call Report Template"); 		
+		ExecuteQuery();
+		if (FirstRecord()) 
+		{			
+			var sRetVal= InvokeMethod ("GetFile",  "LitFileName");
+			var ilength = sRetVal.length;
+			iPath = ilength - 8;
+			sOpenPath = sRetVal.substring (8, ilength);
+		}
+	} //end with literature bc
+	
+	//Get User Name
+	var oEmpBO = TheApplication().GetBusObject("Employee");
+	var oEmpBC = oEmpBO.GetBusComp("Employee");
+	var sUserName;
+	
+	with(oEmpBC)
+	{	
+		SetViewMode(AllView);
+		ActivateField("Login Name");
+		ActivateField("Employee Full Name");
+		SetSearchSpec("Login Name",TheApplication().LoginName());
+		ExecuteQuery();
+		if(FirstRecord())
+		{
+			sUserName = GetFieldValue("Employee Full Name");
+		}
+	}
+	
+	var oEmpBC = null;
+	var oEmpBO = null;
+		
+	
+	//Attach document to Matrix
+	var oCR = oCRBO.GetBusComp("EDB Call Report");
+	var sId = oCR.GetFieldValue("Id");
+	var sStatus = oCR.GetFieldValue("Status");
+	
+	var oCRBO2 = TheApplication().GetBusObject("EDB Call Report");
+	var oCRGenAtt = oCRBO2.GetBusComp("EDB Call Report General Attachment");
+	
+	with(oCRGenAtt)
+	{			
+		ExecuteQuery();
+					
+		icut = iPath - 4;
+		//TheApplication().RaiseErrorText(sOpenPath);	
+		var dDate = new Date();
+		var sSavePath = sOpenPath.substring(0, icut) + dDate.getDay() + dDate.getMonth() + dDate.getHours() + dDate.getMinutes() + dDate.getSeconds() + ".doc";
+		
+		owdoc.Saveas(sSavePath);
+		
+		NewRecord(0);
+		InvokeMethod("CreateFile", sSavePath, "ActivityFileName", "Y");
+		var sComment = sStatus + " CR generated on " + dDate + " by " + sUserName;
+		SetFieldValue("Activity Id",sId);
+		SetFieldValue("Comment", sComment);
+		WriteRecord();				
+	}
+	
+	oCRGenAtt = null;
+	oCRBO2 = null;
+	
+	//Refresh screen
+	var oCRGenAtt = oCRBO.GetBusComp("EDB Call Report General Attachment");
+	oCRGenAtt.ClearToQuery();		
+	oCRGenAtt.ExecuteQuery();		
+	
+	oCRGenAtt = null;
+}
+
+
+function CRDetail(oWord, owdoc, oCRBO)
+{
+	var sCompanyName, sCompanyOIC;
+
+	//Get Call Report Values
+	var oCRBC = oCRBO.GetBusComp("EDB Call Report");
+	var sLogName = "d:\\log\\test.txt";
+	TheApplication().TraceOn(sLogName, "Allocation", "OLE");
+	TheApplication().Trace("Start Tracing");	
+
+	try
+	{
+	with(oCRBC)
+	{
+	
+	ActivateField("Account Name");	
+	ActivateField("Cluster");	
+	ActivateField("Sub-Cluster");	
+	ActivateField("Filed to Region");	
+	ActivateField("Account OIC");	
+	ActivateField("Primary Owner Full Name");	
+	ActivateField("Planned");	
+	ActivateField("Comment");	
+	ActivateField("Discussion Topic 1");	
+
+	//LL 5Jul05 sr/matrix-05-044
+	ActivateField("Company Name Image");
+	ActivateField("Company OIC Full Name Image");
+	
+	sCompanyName = GetFieldValue("Account Name");
+	sCompanyOIC = GetFieldValue("Account OIC");
+
+	//LL 24Jun05 sr/matrix-05-044
+	//if status is completed, to retrieve the image	of company name and OIC
+	if (GetFieldValue("Status")=="Completed")
+	{	
+		sCompanyName = GetFieldValue("Company Name Image");
+		sCompanyOIC = GetFieldValue("Company OIC Full Name Image");
+	}
+		
+	oWord.Selection.Font.Size = 8;		
+	oWord.Selection.Font.Color = 0
+	var oTbl1 = owdoc.Tables.Add(oWord.Selection.Range, 3, 4);
+	oTbl1.Cell(3,1).Merge(oTbl1.Cell(3,4));	
+	
+	//1st Row
+	oTbl1.Rows(1).Cells(1).Select();	
+	oWord.Selection.ParagraphFormat.Alignment = 3;
+	oWord.Selection.Font.Bold = true;	
+	oWord.Selection.TypeText("Company:\n");
+	oWord.Selection.Font.Bold = false;	
+	//oWord.Selection.TypeText(GetFieldValue("Account Name")+"\n");
+	oWord.Selection.TypeText(sCompanyName+"\n");
+
+	
+	
+	oTbl1.Rows(1).Cells(2).Select();	
+	oWord.Selection.ParagraphFormat.Alignment = 3;
+	oWord.Selection.Font.Bold = true;	
+	oWord.Selection.TypeText("File to Cluster:\n");
+	oWord.Selection.Font.Bold = false;	
+	oWord.Selection.TypeText(GetFieldValue("Cluster"));
+	
+	
+	oTbl1.Rows(1).Cells(3).Select();	
+	oWord.Selection.ParagraphFormat.Alignment = 3;
+	oWord.Selection.Font.Bold = true;	
+	oWord.Selection.TypeText("File to Sub-Cluster:\n");
+	oWord.Selection.Font.Bold = false;	
+	oWord.Selection.TypeText(GetFieldValue("Sub-Cluster"));
+	
+	
+	oTbl1.Rows(1).Cells(4).Select();
+	oWord.Selection.ParagraphFormat.Alignment = 3;
+	oWord.Selection.Font.Bold = true;	
+	oWord.Selection.TypeText("File to Region:\n");
+	oWord.Selection.Font.Bold = false;	
+	oWord.Selection.TypeText(GetFieldValue("Filed to Region"));
+	
+	//2nd Row
+	oTbl1.Rows(2).Cells(1).Select();	
+	oWord.Selection.ParagraphFormat.Alignment = 3;
+	oWord.Selection.Font.Bold = true;	
+	oWord.Selection.TypeText("Company OIC\n");
+	oWord.Selection.Font.Bold = false;	
+	//oWord.Selection.TypeText(GetFieldValue("Account OIC")+"\n");
+	oWord.Selection.TypeText(sCompanyOIC+"\n");
+	
+	
+	oTbl1.Rows(2).Cells(2).Select();	
+	oWord.Selection.ParagraphFormat.Alignment = 3;
+	oWord.Selection.Font.Bold = true;	
+	oWord.Selection.TypeText("Filed By\n");
+	oWord.Selection.Font.Bold = false;	
+	oWord.Selection.TypeText(GetFieldValue("Primary Owner Full Name"));
+	
+	
+	oTbl1.Rows(2).Cells(3).Select();
+	oWord.Selection.ParagraphFormat.Alignment = 3;	
+	oWord.Selection.Font.Bold = true;	
+	oWord.Selection.TypeText("Meeting Date\n");
+	oWord.Selection.Font.Bold = false;	
+	oWord.Selection.TypeText(GetFieldValue("Planned"));	
+
+	oTbl1.Rows(2).Cells(4).Select();
+	oWord.Selection.ParagraphFormat.Alignment = 3;	
+	oWord.Selection.Font.Bold = true;	
+	oWord.Selection.TypeText("Status:\n");
+	oWord.Selection.Font.Bold = false;	
+	oWord.Selection.TypeText(GetFieldValue("Status"));
+	
+	//3rd Row
+	oTbl1.Rows(3).Cells(1).Select();	
+	oWord.Selection.ParagraphFormat.Alignment = 3;
+	oWord.Selection.Font.Bold = true;	
+	oWord.Selection.TypeText("Summary\n");
+	oWord.Selection.Font.Bold = false;	
+	oWord.Selection.TypeText(GetFieldValue("Comment"));	
+	
+	}
+	}
+	catch(objException)
+	{
+		var sException = objException.toString();
+		TheApplication().Trace("***Exception***");
+		TheApplication().Trace(sException);
+		TheApplication().Trace("End Tracing");
+		TheApplication().TraceOff();
+			
+		return (CancelOperation);			
+	}
+	
+	oCRBC = null;
+}
+
+
+function EDBDistribution(oWord, owdoc, oCRBO)
+{		
+	oWord.Selection.Font.Size = 8;		
+	oWord.Selection.Font.Color = 0;
+	var oTbl2 = owdoc.Tables.Add(oWord.Selection.Range, 1, 6);		
+	oTbl2.Columns(1).SetWidth(59.4,1);
+	oTbl2.Columns(4).SetWidth(124.9,1);
+	oTbl2.Columns(5).SetWidth(71.8,1);
+	oTbl2.Columns(6).SetWidth(84,1);	
+	
+	//1st Row
+	oWord.Selection.Font.Bold = true;
+	
+	oTbl2.Rows(1).Cells(1).Select();		
+	oWord.Selection.TypeText("Participant");
+	
+	oTbl2.Rows(1).Cells(2).Select();
+	oWord.Selection.TypeText("First Name");
+	
+	oTbl2.Rows(1).Cells(3).Select();
+	oWord.Selection.TypeText("Last Name");
+	
+	oTbl2.Rows(1).Cells(4).Select();
+	oWord.Selection.TypeText("Email");
+	
+	oTbl2.Rows(1).Cells(5).Select();
+	oWord.Selection.TypeText("Position");
+	
+	oTbl2.Rows(1).Cells(6).Select();
+	oWord.Selection.TypeText("Division");
+				
+	//Get Distribution
+	var oCRBCDis = oCRBO.GetBusComp("EDB Call Report Distribution");
+	var iRowCount = 2
+	with(oCRBCDis)
+	{					
+		ActivateField("Participant Flag");	
+		ActivateField("First Name");	
+		ActivateField("Last Name");	
+		ActivateField("EMail Addr");	
+		ActivateField("Position Type");	
+		ActivateField("Division");	
+		
+		ClearToQuery();
+		ExecuteQuery();	
+		var bIsRecord = FirstRecord();
+		while(bIsRecord)
+		{
+			oWord.Selection.InsertRowsBelow();
+			
+			oTbl2.Rows(iRowCount).Cells(1).Select();
+			oWord.Selection.Font.Bold = false;		
+			if(GetFieldValue("Participant Flag") == "Y")		
+			{
+				oWord.Selection.TypeText("Yes");
+			}
+			else
+			{
+				oWord.Selection.TypeText("");
+			}
+			
+	
+			oTbl2.Rows(iRowCount).Cells(2).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("First Name"));
+	
+			oTbl2.Rows(iRowCount).Cells(3).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Last Name"));
+	
+			oTbl2.Rows(iRowCount).Cells(4).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("EMail Addr"));
+		
+			oTbl2.Rows(iRowCount).Cells(5).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Position Type"));
+	
+			oTbl2.Rows(iRowCount).Cells(6).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Division"));
+	
+			iRowCount ++;
+			bIsRecord = NextRecord();
+		}
+	}
+	
+	oCRBCDis = null;
+	
+}
+
+function EDBDistributionImage(oWord, owdoc, oCRBO)
+{		
+	oWord.Selection.Font.Size = 8;		
+	oWord.Selection.Font.Color = 0;
+	var oTbl2 = owdoc.Tables.Add(oWord.Selection.Range, 1, 6);		
+	oTbl2.Columns(1).SetWidth(59.4,1);
+	oTbl2.Columns(4).SetWidth(124.9,1);
+	oTbl2.Columns(5).SetWidth(71.8,1);
+	oTbl2.Columns(6).SetWidth(84,1);	
+	
+	//1st Row
+	oWord.Selection.Font.Bold = true;
+	
+	oTbl2.Rows(1).Cells(1).Select();		
+	oWord.Selection.TypeText("Participant");
+	
+	oTbl2.Rows(1).Cells(2).Select();
+	oWord.Selection.TypeText("First Name");
+	
+	oTbl2.Rows(1).Cells(3).Select();
+	oWord.Selection.TypeText("Last Name");
+	
+	oTbl2.Rows(1).Cells(4).Select();
+	oWord.Selection.TypeText("Email");
+	
+	oTbl2.Rows(1).Cells(5).Select();
+	oWord.Selection.TypeText("Position");
+	
+	oTbl2.Rows(1).Cells(6).Select();
+	oWord.Selection.TypeText("Division");
+				
+	//Get Distribution
+	var oCRBCDis = oCRBO.GetBusComp("EDB Distribution Call Report Participants");
+	var iRowCount = 2
+	with(oCRBCDis)
+	{					
+		ActivateField("CR Participant");	
+		ActivateField("CR First Name");	
+		ActivateField("CR Last Name");	
+		ActivateField("CR Email");	
+		ActivateField("CR Position Type");	
+		ActivateField("CR Division");	
+		
+		ClearToQuery();
+		ExecuteQuery();	
+		var bIsRecord = FirstRecord();
+		while(bIsRecord)
+		{
+			oWord.Selection.InsertRowsBelow();
+			
+			oTbl2.Rows(iRowCount).Cells(1).Select();
+			oWord.Selection.Font.Bold = false;		
+			if(GetFieldValue("CR Participant") == "Y")		
+			{
+				oWord.Selection.TypeText("Yes");
+			}
+			else
+			{
+				oWord.Selection.TypeText("");
+			}
+			
+	
+			oTbl2.Rows(iRowCount).Cells(2).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("CR First Name"));
+	
+			oTbl2.Rows(iRowCount).Cells(3).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("CR Last Name"));
+	
+			oTbl2.Rows(iRowCount).Cells(4).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("CR Email"));
+		
+			oTbl2.Rows(iRowCount).Cells(5).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("CR Position Type"));
+	
+			oTbl2.Rows(iRowCount).Cells(6).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("CR Division"));
+	
+			iRowCount ++;
+			bIsRecord = NextRecord();
+		}
+	}
+	
+	oCRBCDis = null;
+	
+}
+
+function FollowupAct(oWord, owdoc, oCRBO)
+{	
+	oWord.Selection.Font.Size = 8;
+	oWord.Selection.Font.Color = 0
+	var oTbl4 = owdoc.Tables.Add(oWord.Selection.Range, 1, 6);
+	oTbl4.Columns(1).SetWidth(89.4,1);
+	oTbl4.Columns(2).SetWidth(89.4,1);
+	oTbl4.Columns(3).SetWidth(132.6,1);
+			
+	//1st Row
+	oWord.Selection.Font.Bold = true;
+	
+	oTbl4.Rows(1).Cells(1).Select();	
+	oWord.Selection.TypeText("Activity Date");
+	
+	oTbl4.Rows(1).Cells(2).Select();		
+	oWord.Selection.TypeText("Responsible By");
+	
+	oTbl4.Rows(1).Cells(3).Select();
+	oWord.Selection.TypeText("Activity Type");
+	
+	oTbl4.Rows(1).Cells(4).Select();
+	oWord.Selection.TypeText("Summary");
+	
+	oTbl4.Rows(1).Cells(5).Select();
+	oWord.Selection.TypeText("Priority");
+	
+	oTbl4.Rows(1).Cells(6).Select();
+	oWord.Selection.TypeText("Status");
+	
+	
+	//Get Client Participant
+	var oCRAct = oCRBO.GetBusComp("EDB Call Report Action");
+	var iRowCount = 2
+	with(oCRAct)
+	{		
+		ActivateField("Planned");	
+		ActivateField("Owner Full Name");	
+		ActivateField("Type");	
+		ActivateField("Comment");	
+		ActivateField("Priority");	
+		ActivateField("Status");	
+		
+		ClearToQuery();
+		ExecuteQuery();	
+		var bIsRecord = FirstRecord();
+		
+		while(bIsRecord)
+		{
+			oWord.Selection.InsertRowsBelow();
+			
+			oTbl4.Rows(iRowCount).Cells(1).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;		
+			oWord.Selection.TypeText(GetFieldValue("Planned").substring(0,10));			
+			//oWord.Selection.TypeText(GetFieldValue("Planned"));
+			
+			oTbl4.Rows(iRowCount).Cells(2).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Owner Full Name"));
+	
+			oTbl4.Rows(iRowCount).Cells(3).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Type"));
+		
+			oTbl4.Rows(iRowCount).Cells(4).Select();
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Comment"));
+	
+			oTbl4.Rows(iRowCount).Cells(5).Select();	
+			oWord.Selection.ParagraphFormat.Alignment = 3;		
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Priority"));			
+	
+			oTbl4.Rows(iRowCount).Cells(6).Select();	
+			oWord.Selection.ParagraphFormat.Alignment = 3;		
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Status"));
+	
+			iRowCount ++;
+			bIsRecord = NextRecord();
+		}
+	}
+	
+	oCRAct = null;
+	
+}
+
+function Topic(oWord, owdoc, oCRBO)
+{	
+	//Get Call Report Values
+	var oCRBC = oCRBO.GetBusComp("EDB Call Report");
+	
+	with(oCRBC)
+	{			
+			ActivateField("Discussion Topic 1");
+			ActivateField("Discussion Topic 2");
+			ActivateField("Discussion Topic 3");
+			ActivateField("Discussion Topic 4");
+			ActivateField("Discussion Topic 5");
+			ActivateField("Discussion Topic 6");
+			ActivateField("Discussion Topic 7");
+			ActivateField("Discussion Topic 8");
+			ActivateField("Discussion Topic 9");
+			ActivateField("Discussion Topic 10");
+			
+			
+			oWord.Selection.Font.Size = 8;	
+			oWord.Selection.Font.Color = 0;			
+			var oTbl4 = owdoc.Tables.Add(oWord.Selection.Range, 3, 4);
+			
+			//1st Row
+			oTbl4.Rows(1).Cells(1).Select();
+			oWord.Selection.Font.Bold = true;	
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.TypeText("Resources - Human Capital:\n");
+			oWord.Selection.Font.Bold = false;	
+			oWord.Selection.TypeText(GetFieldValue("Discussion Topic 1"));
+			
+			oTbl4.Rows(1).Cells(2).Select();
+			oWord.Selection.Font.Bold = true;	
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.TypeText("Shared Services - e-Biz Hubs:\n");
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Discussion Topic 3"));
+			
+			oTbl4.Rows(1).Cells(3).Select();
+			oWord.Selection.Font.Bold = true;	
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.TypeText("Shared Services - Other Shared Svcs:\n");
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Discussion Topic 5"));
+			
+			oTbl4.Rows(1).Cells(4).Select();
+			oWord.Selection.Font.Bold = true;	
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.TypeText("Other Services - Coporate Training:\n");
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Discussion Topic 7"));
+			
+			//2nd Row
+			oTbl4.Rows(2).Cells(1).Select();
+			oWord.Selection.Font.Bold = true;	
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.TypeText("Resources - Infrastructure:\n");
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Discussion Topic 2"));
+			
+			oTbl4.Rows(2).Cells(2).Select();
+			oWord.Selection.Font.Bold = true;	
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.TypeText("Shared Services - MSCC:\n");
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Discussion Topic 4"));
+			
+			oTbl4.Rows(2).Cells(3).Select();
+			oWord.Selection.Font.Bold = true;	
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.TypeText("Other Servies - HQ:\n");
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Discussion Topic 6"));
+			
+			oTbl4.Rows(2).Cells(4).Select();
+			oWord.Selection.Font.Bold = true;	
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.TypeText("Intellectual Property:\n");
+			oWord.Selection.Font.Bold = false;			
+			oWord.Selection.TypeText(GetFieldValue("Discussion Topic 8"));
+			
+			
+			//3rd Row
+			oTbl4.Rows(3).Cells(1).Select();
+			oWord.Selection.Font.Bold = true;	
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.TypeText("RFID:\n");
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Discussion Topic 9"));
+			
+			oTbl4.Rows(3).Cells(2).Select();
+			oWord.Selection.Font.Bold = true;	
+			oWord.Selection.ParagraphFormat.Alignment = 3;
+			oWord.Selection.TypeText("Resources - Testbedding:\n");
+			oWord.Selection.Font.Bold = false;
+			oWord.Selection.TypeText(GetFieldValue("Discussion Topic 10"));
+			
+		
+	}
+	oCRBC = null;
+}
+
+
+function WebApplet_PreInvokeMethod (MethodName)
+{
+	if(MethodName == "CR")
+	{		
+		var oWord;
+		var owdoc;
+				
+		try{
+								
+		//Get CR Object
+		var oCRBO = this.BusObject();	
+
+		var oCRBC = oCRBO.GetBusComp("EDB Call Report");
+		with(oCRBC)
+		{		
+			ActivateField("Status");	
+			var sStatus = GetFieldValue("Status");	
+		}
+				
+		oWord = COMCreateObject("Word.Application");
+		oWord.DisplayAlerts = 0;
+		oWord.Visible = 0;
+		
+		owdoc = oWord.Documents.Add();
+		
+		oWord.Selection.Font.Bold = true;
+		oWord.Selection.Font.Size = 14;
+		oWord.Selection.Font.Name = "Arial";
+		oWord.Selection.ParagraphFormat.Alignment = 1;
+		owdoc.Sections(1).PageSetup.LeftMargin = oWord.InchesToPoints(0.45);
+		owdoc.Sections(1).PageSetup.RightMargin = oWord.InchesToPoints(0.75);
+		
+		//Create header
+		owdoc.Sections(1).Headers(1).Range.InsertAfter("CONFIDENTIAL");
+		owdoc.Sections(1).Headers(1).Range.Paragraphs.Alignment = 1;;
+		owdoc.Sections(1).Headers(1).Range.Font.Size = 9;
+		owdoc.Sections(1).Headers(1).Range.Font.Name = "Arial";
+		
+		//Set Font
+		oWord.Selection.Font.Name = "Arial";		
+		oWord.Selection.ParagraphFormat.Alignment = 3;
+									
+		//Detail		
+		CRDetail(oWord, owdoc, oCRBO);		
+		oWord.Selection.GoToNext(3);
+		oWord.Selection.TypeText("\r\n\r\n");	
+	
+		//EDB Distribution		
+		oWord.Selection.Font.Size = 12;
+		oWord.Selection.Font.Color = 10040115;
+		oWord.Selection.TypeText("EDB Distribution\n\n");				
+		if (sStatus=="Completed")
+		{
+			EDBDistributionImage(oWord, owdoc, oCRBO);
+		}
+		else
+		{
+			EDBDistribution(oWord, owdoc, oCRBO);		
+		}
+		oWord.Selection.GoToNext(3);
+		oWord.Selection.TypeText("\r\n\r\n");	
+
+		//Client Participant		
+		oWord.Selection.Font.Size = 12;	
+		oWord.Selection.Font.Color = 10040115;
+		oWord.Selection.TypeText("Client Participants\n\n");
+		if (sStatus=="Completed")
+		{
+			ClientParticipantImage(oWord, owdoc, oCRBO);
+		}
+		else
+		{
+			ClientParticipant(oWord, owdoc, oCRBO);
+		}
+		oWord.Selection.GoToNext(3);
+		oWord.Selection.TypeText("\r\n\r\n");	
+	
+		//Topics
+		oWord.Selection.Font.Size = 12;	
+		oWord.Selection.Font.Color = 10040115;	
+		oWord.Selection.TypeText("Discussion Topics\n\n");
+		Topic(oWord, owdoc, oCRBO);		
+		oWord.Selection.GoToNext(3);
+		oWord.Selection.TypeText("\r\n\r\n");	
+		
+		//Follow-up Activities
+		oWord.Selection.Font.Size = 12;	
+		oWord.Selection.Font.Color = 10040115;	
+		oWord.Selection.TypeText("Follow Up Activities\n\n");
+		FollowupAct(oWord, owdoc, oCRBO);	
+		oWord.Selection.GoToNext(3);
+		oWord.Selection.TypeText("\r\n\r\n");
+
+		//Copy CR template and save to attachment
+		CopyTemplate(oWord, owdoc, oCRBO);
+		
+		//Send as Attachment
+		this.BusComp().SetSortSpec("Created(DESCENDING)");
+		this.BusComp().ExecuteQuery();
+		
+		if (this.BusComp().FirstRecord())
+		{
+			this.InvokeMethod("FileSendMail");
+		}
+												
+		}
+		catch(objException)
+		{
+
+		}
+		finally
+		{				
+			owdoc.Close(0);  
+			oWord.Quit(0);
+		
+			oWord = null;
+			owdoc = null;
+			return (CancelOperation);	
+		}									
+	}
+		
+	return (ContinueOperation);
+}
+
+function WebApplet_PreCanInvokeMethod (MethodName, &CanInvoke)
+{
+	if(MethodName == "CR")
+	{		
+		/*if(this.BusComp().ParentBusComp().GetFieldValue("Primary Owner Id") == TheApplication().LoginId() || this.BusComp().ParentBusComp().GetFieldValue("Created By") == TheApplication().LoginId())
+		{
+			CanInvoke = "TRUE";						
+		}
+		else
+		{
+			CanInvoke = "FALSE";
+		}*/
+		CanInvoke = "TRUE";						
+						
+		return (CancelOperation);
+	}
+	else if(MethodName == "NewRecord")
+	{
+		CanInvoke = "FALSE";
+		return(CancelOperation);
+	}
+	return (ContinueOperation);
+}			

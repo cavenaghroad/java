@@ -1,0 +1,102 @@
+table {
+	border:1px;
+    border-collapse: collapse;
+}
+th {
+	font-weight:bold;
+    padding: 4px;
+    /* border-bottom: 1px solid #ddd; */
+    font-size:12px;
+	font-family:'Nanum Gothic',Arial;
+	font-weight:normal;
+	color:#000000;
+}
+
+td {
+    padding: 4px;
+/*     border-bottom: 1px solid #ddd; 
+    font-size:12px;*/
+	font-family:'Nanum Gothic',Arial;
+/*	font-weight:normal;
+	color:#000000;
+    cursor:pointer;*/
+}
+.font18 {
+	font-size:18px;
+	height:24px;
+}
+.blackbar {
+	background-color:black;
+	color:white;
+	height:24px;
+}
+.warmlight{
+	background-color:#faf5c8;
+}
+.menu
+{
+	cursor:pointer;
+}
+body
+{
+	background-color:#fafafa;	/* Watermist */
+}
+.tblTitle
+{
+	background-color:black;
+	border:1px solid black;
+}
+.dvBody
+{
+	margin:0;
+	padding:0;
+	position:fixed;
+	width:880px;
+	overflow:auto;
+	top:153px;
+	background-color:#fafafa;	/* Watermist */
+}
+.tblQueue
+{
+	/* border-style:solid; */
+	border:1px solid gray;
+}
+.tblData
+{
+	/* border-style:solid; */
+	border:1px solid gray;
+}
+/*.ui-dialog,.ui-widget, .ui-widget-content, .ui-corner-all, .ui-draggable, .ui-resizable {background:#dcd0b8 !important}​*/
+.divPicture
+{
+	margin:0;padding:0;
+}
+.qty {
+    width: 50px !important;
+}
+.opt-color {color:red}
+.desk
+{
+	background-color:#a4cff0;
+	border-radius:10px;
+	box-shadow: 5px 5px 5px #888888;
+	text-align:center;
+	position:absolute;
+	font-size:18px;
+}
+.working
+{
+	background-color:cyan;
+	border-radius:10px;
+	box-shadow: 5px 5px 5px #888888;
+	text-align:center;
+/*	width:80px;height:50px;*/
+}
+.done
+{
+	font-size:18px; color:black;
+}
+.ordered
+{
+	font-size:18px;color:red;
+}

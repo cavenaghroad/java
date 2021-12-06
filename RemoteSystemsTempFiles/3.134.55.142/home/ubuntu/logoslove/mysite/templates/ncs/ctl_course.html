@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<div align=center style='width:100%;height:100%'>
+<table style='border:1px solid green;border-collapse:collapse;'>
+<tr>
+	<td valign=top><select id=selClass style='width:400px' size=10>
+{% if rec %}
+        {% for item in rec %}
+        	<option value='{{item.rowid}}'>{{item.title}}</option>
+        {% endfor %}
+{% endif %} -->	
+	</select><br>
+	<button id=btnLink>Link</button></td>
+	<td valign=top>
+		<table id=tblClass>
+		<tr><td align=right>Class ID</td><td><input type='text' id=classcode size=10>
+			<input type=hidden id=classid></td></tr>
+		<tr><td align=right>Title</td><td><textarea id=title rows=2 cols=40></textarea></td></tr>
+		<tr><td align=right>Seat Count</td><td><input type=number id=seat_cnt value=0 min=0 style='width:40px'></td></tr>
+		<tr><td align=right>Column Count</td><td><input type=number id=col_cnt value=0 min=0 style='width:40px'></td></tr>
+		<tr><td align=right>Start Date</td><td><input type=date id=period1></td>
+		<tr><td align=right>End Date</td><td><input type=date id=period2></td>
+		<tr><td align=right>Alive</td><td><input type=checkbox id=alive></tr>
+		<tr><td align=center colspan=2><button id=btnSaveClass>Save</button><button id=btnDeleteClass>Delete</button> 
+			<button id=btnResetClass>Clear</button>
+		</td></tr>
+		</table>
+	</td>
+</tr>
+<tr><td height=10px>&nbsp;</td></tr>
+<tr>
+	<td valign=top>
+		<button id=btnLoad>Load</button><br>
+		<select id=selStudent style='width:400px;' size=30></select>
+	</td>
+	<td valign=top>
+		<table id=tblStudent>
+			<tr><td align=right>이름</td><td><input type=text id=name>
+				<input type=hidden id=studentid>
+			</td></tr>
+			<tr><td align=right>생년월일</td><td><input type=text id=birth></td></tr>
+			<tr><td align=right>최종학력 </td><td><input type=text id=school></td></tr>
+			<tr><td align=right>모바일</td><td><input type=text id=mobile></td></tr>
+			<tr><td align=right>좌석번호</td><td><input type=number id=seq></td></tr>
+			<tr><td align=right>AnyDesk ID</td><td><input type=text id=tvid></td></tr>
+			<tr><td align=right>&nbsp;</td><td><input type=checkbox id=cAlive>Alive</td></tr>
+			<br><td colspan=2 align=center><button id=btnSaveStudent>Save</button><button id=btnDeleteStudent>Delete</button>
+					<button id=btnResetStudent>Clear</button>
+			<tr><td>
+		</table>
+	</td>
+</tr>
+</table>
+</div>
+<script>
+url_ctl_class="{% url 'ncs:ctl_class' %}"; 
+url_ctl_student="{% url 'ncs:ctl_student' %}";
+url_DrillStatus="{% url 'ncs:DrillStatus' %}";
+url_getDrill="{% url 'ncs:getDrill' %}";
+url_drillList="{% url 'ncs:drillList' %}";
+</script>
+<script src="{% static 'ncs_student.js' %}"></script>
+{% endblock %}

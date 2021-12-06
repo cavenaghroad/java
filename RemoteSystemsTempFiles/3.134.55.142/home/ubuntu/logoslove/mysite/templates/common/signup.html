@@ -1,0 +1,74 @@
+{% extends "bbs.html" %}
+{% block content %}
+<form method="post" action="{% url 'common:newbie' %}">
+    {% csrf_token %}
+    {% include "form_errors.html" %}
+    <table class=border align=center>
+    <caption><h2>가입하기</h2></caption>
+    <tr><td align=right class=border style='width:200px;vertical-align:middle;'><h2>로긴아이디</h2></td><td colspan=3 class=border>
+        <input type="text" name="mobile" id="mobile" style='font-size:20px'
+               value="{{ form.mobile.value|default_if_none:'' }}">
+    </td></tr>
+    <tr><td align=right class=border><h2>비밀번호</h2></td><td colspan=3 class=border>
+        <input type="password" name="password1" id="password1" style='font-size:20px'
+               value="{{ form.password1.value|default_if_none:'' }}">
+    </td></tr>
+    <tr><td align=right class=border><h2>비밀번호 확인</h2></td><td colspan=3 class=border>
+        <input type="password" name="password2" id="password2" style='font-size:20px'
+               value="{{ form.password2.value|default_if_none:'' }}">
+    </td></tr>
+    <tr><td align=right class=border><h2>사용자 이름</h2></td><td colspan=3 class=border>
+        <input type="text" name="username" id="username" style='font-size:20px'
+               value="{{ form.username.value|default_if_none:'' }}">
+    </td></tr>
+    <tr><td align=right class=border><h2>생년월일</h2></td><td class=border>
+        <input type="text" name="birthday" id="birthday" style='font-size:20px'
+               value="{{ birthday }}">
+               <td align=right class=border><h2>성별</h2></td><td class=border>
+        		<input type=radio name=gender id=male value=male><h2>남</h2>
+               	<input type=radio name=gender id=female value=female><h2>여</h2>
+    </td></tr>
+    <tr><td align=right class=border><h2>이메일</h2></td><td colspan=3 class=border>
+        <input type="text" name="email" id="email" style='font-size:20px'
+               value="{{ form.email.value|default_if_none:'' }}">
+    </td></tr>
+    <tr><td colspan=4 align=center class=border>
+    	<button id=btnGo><h2>가입</h2></button>
+    	<button id=btnCancel><h2>취소</h2></button>
+    </td></tr>
+    </table>
+</form>
+<div class="col-8 text-right">
+    <span>또는 <a href="{% url 'common:login' %}"><h2>로그인 하세요.</h2></a></span>
+</div>
+<script>
+$(document)
+.on('click','#btnGo',function(){
+	$('input').each(function(ndx,txt){
+		$(this).val($.trim(txt));
+	});
+	if($('#mobile').val()=='') {
+		alert('모바일번호를 입력하십시오');
+		return false;
+	}
+	if(isNaN($('#mobile').val())){
+		alert('모바일번호는 숫자로만 입력하십시오');
+		return false;
+	}
+	if($('#password1').val()!=$('#password2').val()){
+		alert('비밀번호와 확인내용이 일치하지 않습니다');
+		return false;
+	}
+	if($('#username').val()==''){
+		alert('사용자 이름(게시물 작성시 표시될 별명)을 입력하십시오');
+		return false;
+	}
+	if($('#email').val()==''){
+		alert('비밀번호 분실시 임시비밀번호를 보낼 이메일주소를 입력하십시오');
+		return false;
+	}
+	$('form').submit();
+	return false;
+});
+</script>
+{% endblock %}

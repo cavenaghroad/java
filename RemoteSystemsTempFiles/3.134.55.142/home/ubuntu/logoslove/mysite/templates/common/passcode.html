@@ -1,0 +1,41 @@
+{% extends "bbs.html" %}
+{% block content %}
+<style>
+table {
+	width:700px;
+	border-collapse:collapse;
+}
+.brd {
+	border:1px solid grey;
+}
+</style>
+{% if nick is None %}
+<script>
+</script>
+{% else %}
+<table align=center valign=top >
+<tr>
+	<td rowspan=3 class='brd'>Passcode 변경</td>
+	<td class='brd'>현재 비밀번호</td>
+	<td class='brd'><input type=password id=oldpasscode></td>
+</tr>
+<tr>
+	<td class='brd'>새 비밀번호</td>
+	<td class='brd'><input type=password id=newpasscode1></td>
+</tr>
+<tr>
+	<td class='brd'>새 비밀번호 확인</td>
+	<td class='brd'><input type=password id=newpasscode2></td>
+</tr>	
+<tr>
+	<td colspan=3 align=center class='brd'>
+		<button id=btnChange>완료</button>&nbsp;&nbsp;
+		<button id=btnCancel>취소</button>
+	</td>
+</tr>
+</table>
+<script>
+</script>
+{% endif %}
+{% endblock %}
+

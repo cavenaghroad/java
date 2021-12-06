@@ -1,0 +1,76 @@
+{% extends "bbs.html" %}
+{% block content %}
+<tr>
+	<td align=right>
+		{% if nick is None %}
+		<a href='{% url 'common:login' %}'>로그인</a>
+		{% else %}
+		[<a href='{% url 'common:info' %}'>{{nick}}</a>]&nbsp;&nbsp;<a href='{% url 'common:logout' %}'>로그아웃</a>
+		{% endif %}
+	</td>
+</tr>
+<tr>
+	<td>
+		<form method=post action='{% url 'board:newpost' %}'>
+		{% csrf_token %}
+		{% include "form_errors.html" %}
+		<table align=center style='width:700px;' class=border>
+		<tr><td align=right class=border>분류</td><td><select id=seltype name=seltype><option value='-'>-</option>
+		{% for one in btype %}
+		<option value='{{one.name}}'>{{one.name}}</option>
+		{% endfor %}
+		</select></td></tr>
+		<tr><td align=right class=border>제목</td><td class=border><input type=text name=title id=title size=80></td></tr>
+		<tr><td align=right class=border>내용</td><td class=border><textarea name=content id=content rows=20 cols=80></textarea></td></tr>
+		<tr><td align=right class=border>첨부화일</td><td class=border>
+    <input type="file" name="userfile" id="userfile" multiple/><br/></td></tr>
+		<tr><td colspan=2 align=right class=border>
+			<button type=submit name=btnAddNew id=btnAddNew>글 등록</button>
+			<a href="{% url 'board:bbs_list' %}">취소</a>
+		</td></tr>
+		</table>
+		</form>
+	</td>
+</tr>
+</table>	
+<script src="https://cdn.tiny.cloud/1/h21f3y3ud8gbt6wv78u3kjwmbae3nv5ire0k6bvvbq3zzhjr/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+      selector: 'textarea'
+    });
+</script>
+<script>
+$(document)
+.on('submit','form',function(){
+	if($('#content').val()=='') {
+		alert('no content');
+		return false;
+	}
+	if($('#title').val()==''){
+		alert('no title');
+		return false;
+	}
+	return true;
+})
+;
+function uploadWithAjax()
+{
+	console.log('uploadWithAjax')
+	var form_data = new FormData();
+	console.log($('input[type="file"]')[0].files)
+	form_data.append('userfile', $('input[type="file"]')[0].files)
+	form_data.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+	$.ajax({
+	    url:"/bbs/uploadfile/",
+	    data:form_data,
+	    contentType: false,
+	    processData: false,
+	    enctype:'multipart/form-data',
+	    type:'POST',
+	    success: function(msg){
+	        alert(msg.feedback);
+	    }
+	});
+}
+</script>
+{% endblock %}

@@ -1,0 +1,19 @@
+.evangel
+{
+background-color:red;
+}
+.saint
+{
+background-color:blue;
+}
+.church
+{
+background-color:olive;
+}
+.holiday,
+.fc-agenda .holiday .fc-event-time,
+.holiday a {
+{
+    background-color:   #555555;
+    border-color:       #555555;
+}

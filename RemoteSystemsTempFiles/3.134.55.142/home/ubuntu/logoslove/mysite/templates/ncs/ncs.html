@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<input type=hidden id=student value="{{ name }}">
+<input type=hidden id=classid value='{{rec.classcode}}'>
+<p align=center><h1>{{rec.title}}</h1></p>
+<p><h2 style='color:magenta;'>{{rec.period1}}~{{rec.period2}}</h2></p>
+<table align=center valign=top style='border:1px solid green;border-collapse:collapse;'> 
+<tr><td colspan=2 align=center id=studentname><h1><b>{{name}}</h1></td></tr>
+<tr style='height:40px;'><td colspan=2>&nbsp;</td></tr>
+<tr><td style='background-color:#dedede' colspan=2>
+	<div style='overflow:auto;height:600px;width:500px;'>
+    <table id=tblMission style='width:100%;border-collapse:collapse;'>
+        <thead><tr style='background-color:white;height:40px;'>
+        	<th align=center>과제</th><th align=center>상태&nbsp;&nbsp;&nbsp;&nbsp;<input type=button id=btnRefresh value='새로고침'></th></tr></thead>
+        <tbody><!-- 
+{% if drill %}
+        {% for itm in drill %}
+        	<tr><td style='border:1px solid yellow;'>{{itm.name}}</td><td style='border:1px solid yellow;cursor:pointer;'>작업중</td></tr>
+        {% endfor %}
+{% endif %} -->
+        </tbody>
+    </table>
+    </div>
+</td></tr>
+</table>
+<script>
+url_refresh="{% url 'ncs:refresh' %}";
+url_setmission="{% url 'ncs:setmission'  %}";
+url_studentList="{% url 'ncs:studentList' %}"; 
+url_DrillControl="{% url 'ncs:DrillControl' %}";
+url_DrillStatus="{% url 'ncs:DrillStatus' %}";
+url_getDrill="{% url 'ncs:getDrill' %}";
+url_drillList="{% url 'ncs:drillList' %}";
+</script>
+<script src="{% static 'ncs.js' %}"></script>
+{% endblock %}

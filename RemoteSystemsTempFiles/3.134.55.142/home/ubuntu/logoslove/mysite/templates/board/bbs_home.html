@@ -1,0 +1,94 @@
+{% extends "bbs.html" %}
+{% block content %}
+<style>
+th.deco {
+   border:1px solid grey;
+   background-color:black;
+   color:white;   
+}
+th:nth-child(1) {
+	width:200px;
+}
+th:nth-child(2) {
+	width:200px;
+}
+th:nth-child(3) {
+	width:120px;
+}
+th:nth-child(4) {
+	width:60px;
+	text-align:right;
+}
+td:nth-child(4) {
+	text-align:right;
+}
+caption.deco {
+	background-color:brown;
+}
+</style>
+<table align=center style='border-collapse:collapse;'> 
+<tr>
+	<td id=bbs0 style='height:200px;' valign=top>
+		<table class='border'>
+		<caption class=deco>공지사항</caption>
+		<tr><th class=deco>작성시각</th><th class=deco>제목</th><th class=deco>작성자</th><th class=deco>조회수</th></tr>
+{% if bbs0 %}
+{% for rec in bbs0 %}
+			<tr onclick='document.location="{% url 'board:view' rec.rowid %}"' style='cursor:pointer;'><td class='border'>{{rec.created}}</td><td class='border'>{{rec.title}}</td><td class='border'>{{rec.author}}</td>
+			<td class=border>{{rec.hit}}</td>
+			</tr>
+{% endfor %}
+{% endif %}		
+		</table>
+	</td>
+	<td id=bbs1 style='height:200px;' valign=top>
+		<table class='border'>
+		<caption class=deco>자유게시판</caption>
+		<tr><th class=deco>작성시각</th><th class=deco>제목</th><th class=deco>작성자</th><th class=deco>조회수</th></tr>
+{% if bbs1 %}
+{% for rec in bbs1 %}
+			<tr onclick='document.location="{% url 'board:view' rec.rowid %}"' style='cursor:pointer;'><td class='border'>{{rec.created}}</td><td class='border'>{{rec.title}}</td><td class='border'>{{rec.author}}</td>
+			<td class=border>{{rec.hit}}</td>
+			</tr>
+{% endfor %}
+{% endif %}		
+		</table>
+	</td>
+</tr>
+<tr>
+	<td id=bbs2 style='height:200px;' valign=top>
+		<table class='border'>
+		<caption class=deco>질문과 답변</caption>
+		<tr><th class=deco>작성시각</th><th class=deco>제목</th><th class=deco>작성자</th><th class=deco>조회수</th></tr>
+{% if bbs2 %}
+{% for rec in bbs2 %}
+			<tr onclick='document.location="{% url 'board:view' rec.rowid %}"' style='cursor:pointer;'><td class='border'>{{rec.created}}</td><td class='border'>{{rec.title}}</td><td class='border'>{{rec.author}}</td>
+			<td class=border>{{rec.hit}}</td>
+			</tr>
+{% endfor %}
+{% endif %}		
+		</table>
+	</td>
+	<td id=bbs3 style='height:200px;' valign=top>
+		<table class='border'>
+		<caption class=deco>파이썬</caption>
+		<tr><th class=deco>작성시각</th><th class=deco>제목</th><th class=deco>작성자</th><th class=deco>조회수</th></tr>
+{% if bbs3 %}
+{% for rec in bbs3 %}
+			<tr onclick='document.location="{% url 'board:view' rec.rowid %}"' style='cursor:pointer;'><td class='border'>{{rec.created}}</td><td class='border'>{{rec.title}}</td><td class='border'>{{rec.author}}</td>
+			<td class=border>{{rec.hit}}</td>
+			</tr>
+{% endfor %}
+{% endif %}		
+		</table>
+	</td>
+</tr>
+</table>
+<script>
+$(document)
+.ready(function(){
+	
+})
+;
+</script>
+{% endblock %}

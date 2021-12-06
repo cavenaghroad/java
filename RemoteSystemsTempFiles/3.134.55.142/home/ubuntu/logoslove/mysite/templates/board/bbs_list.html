@@ -1,0 +1,67 @@
+{% extends "bbs.html" %}
+{% block content %}
+<style>
+table {
+	width:700px;
+}
+</style>
+<tr>
+	<td align=right>
+		{% if nick is None %}
+		<a href='{% url 'common:login' %}'>로그인</a>
+		{% else %}
+		[<a href='{% url 'common:info' %}'>{{nick}}</a>]&nbsp;&nbsp;<a href='{% url 'common:logout' %}'>로그아웃</a>
+		{% endif %}
+	</td>
+</tr>
+<tr>
+	<td>
+		<table align=center valign=top class='border'>
+		<thead>
+		<tr><th class=border>번호</th><th class=border>작성시각</th><th class=border>제목</th><th class=border>작성자</th><th class=border>조회수</th>
+		</tr>
+		</thead>
+		<tbody id=tblBoard>
+		{% if bbs %}
+		{% for rec in bbs %}
+		     	<tr onclick='document.location="{% url 'board:view' rec.rowid %}"' style='cursor:pointer;'>
+		     		<td align=right class=border>{{forloop.counter}}&nbsp;</td>
+		     		<td width=150px class=border>{{rec.created}}</td>
+		     		<td class=border>{{rec.title}}&nbsp;</td>
+		     		<td class=border>{{rec.author}}</td>
+		     		<td class=border align=right>{{rec.hit}}</td>
+		     	</tr>
+		{% endfor %}
+		{% endif %}
+		</tbody>
+		</table>
+		<table align=center>
+		<tr><td>
+		{% if nick is not None %}
+		<a href="{% url 'board:newview' %}">새글쓰기</a>
+		{% endif %}
+		</td></tr>
+		</table>
+		<table align=center >
+		<tr>
+		<td align=center align=right>
+		{% if bbs.has_previous %}
+			<a href="?p={{bbs.previous_page_number}}">이전</a>
+		{% endif %}
+		{% for pno in bbs.paginator.page_range %}
+		{% if pno == bbs.page_number %}
+			&nbsp;{{pno}}
+		{% else %}	
+			&nbsp;<a href="?p={{pno}}">{{pno}}</a>
+		{% endif %}
+		{% endfor %}
+		{% if bbs.has_next %}
+			&nbsp;<a href="?p={{bbs.next_page_number}}">이전</a>
+		{% endif %}
+		
+		</td>
+		</tr>
+		</table>
+	</td>
+</tr>	
+{% endblock %}
